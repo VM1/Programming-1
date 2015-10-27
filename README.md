@@ -3,6 +3,9 @@ import hashlib
 import requests
 import json
 import random
+from tkinter import *
+from tkinter.messagebox import showinfo
+
 
 ##Random getal genereren
 min = 1
@@ -23,16 +26,66 @@ jsontext = json.loads(response.text)
 
 ##superheldnaam
 superheldnaam = jsontext['data']['results'][randomgetal]['name']
-
+print(superheldnaam)
 
 ##Hints
-hint1 = 'In deze comic is de held voorgekomen:', jsontext['data']['results'][randomgetal]['comics']['items'][0]
-hint2 = 'In deze comic is de held voorgekomen:', jsontext['data']['results'][randomgetal]['comics']['items'][1]
-hint3 = 'In deze comic is de held voorgekomen:', jsontext['data']['results'][randomgetal]['comics']['items'][2]
-hint4 = 'In deze serie is de held voorgekomen:', jsontext['data']['results'][randomgetal]['series']['items'][0]
-hint5 = 'In deze serie is de held voorgekomen:', jsontext['data']['results'][randomgetal]['series']['items'][1]
-print(hint1)
-print(hint2)
-print(hint3)
-print(hint4)
-print(hint5)
+try:
+    hint1 = 'In deze comic is de held voorgekomen:', jsontext['data']['results'][randomgetal]['comics']['items'][0]
+    hint2 = 'In deze comic is de held voorgekomen:', jsontext['data']['results'][randomgetal]['comics']['items'][1]
+    hint3 = 'In deze serie is de held voorgekomen:', jsontext['data']['results'][randomgetal]['series']['items'][0]
+    print(hint1)
+    print(hint2)
+    print(hint3)
+except:
+    print('error, geen hints mogelijk')
+
+
+##GUI Scherm
+standaard_window = Tk()
+
+def achtergrond():
+    standaard_window
+    photo=PhotoImage(file='rsz.gif')
+    label = Label(standaard_window,image=photo)
+    label.pack()
+    standaard_window.mainloop()
+
+topframe= Frame(standaard_window)
+topframe.pack()
+bottomframe=Frame(standaard_window)
+bottomframe.pack(side=BOTTOM)
+sideframe= Frame(standaard_window)
+sideframe.pack(side=LEFT)
+sideframe1=Frame(standaard_window)
+sideframe1.pack(side=RIGHT)
+
+label = Label(topframe,text='Raad de volgende Marvel-held!',bg='red',fg='white',font=('impact',35))
+label.pack()
+
+
+##GUI Hints
+def random_hint():
+    showinfo(title='Klik hier voor een hint',message='Hier komt de "random" hint')
+
+button2 = Button(standaard_window, text= 'Hints!',font=('courier',15),bg='red', command=random_hint)
+button2.pack(padx=50,pady=15)
+button2.config(height=2,width=15)
+
+
+##GUI Antwoord
+invoer_antwoord = Entry(bottomframe)
+invoer_antwoord.pack(pady=5)
+
+def antwoord_goed_fout():
+    if button_antwoord == superheldnaam:
+        showinfo(message='victory')
+    else:
+        showinfo(message='Fout, score -1')
+
+button_antwoord = Button(bottomframe,text = 'OK',font=('courier',15),command=antwoord_goed_fout)
+button_antwoord.pack(pady=15)
+button_antwoord.config(height=1,width=5)
+
+achtergrond()
+standaard_window.mainloop()
+
