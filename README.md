@@ -25,17 +25,16 @@ url = "http://gateway.marvel.com:80/v1/public/characters?limit=100&ts="+timestam
 response = requests.get(url)
 jsontext = json.loads(response.text)
 
-
-print("\nGevonden characters in comics:")
-for item in jsontext['data']['results'][randomgetal]['comics']['items']: # deze volgorde kun je uit het zojuist geprinte resultaat halen of uit de Marvel documentatie!
-    print(item['name'])
-
-print("\nGevonden characters in series:")
-for item in jsontext['data']['results'][randomgetal]['series']['items']: # deze volgorde kun je uit het zojuist geprinte resultaat halen of uit de Marvel documentatie!
-    print(item['name'])
 print('superheldnaam:')
 print(jsontext['data']['results'][randomgetal]['name'])
 
 hint1 = 'In deze comic is de held voorgekomen:', jsontext['data']['results'][randomgetal]['comics']['items'][0]
-
+hint2 = 'In deze comic is de held voorgekomen:', jsontext['data']['results'][randomgetal]['comics']['items'][1]
+hint3 = 'In deze comic is de held voorgekomen:', jsontext['data']['results'][randomgetal]['comics']['items'][2]
+hint4 = 'In deze serie is de held voorgekomen:', jsontext['data']['results'][randomgetal]['series']['items'][0]
+hint5 = 'In deze serie is de held voorgekomen:', jsontext['data']['results'][randomgetal]['series']['items'][1]
 print(hint1)
+print(hint2)
+print(hint3)
+print(hint4)
+print(hint5)
