@@ -1,10 +1,15 @@
-# Programming-1
-# VM1
-Programming project
 import time
 import hashlib
 import requests
 import json
+import random
+
+min = 1
+max = 99
+randomgetal = random.randrange(min,max+1)
+
+print("Random waarde:",randomgetal)
+
 
 timestamp = str(time.time())
 private_key = "950804e972fbe29b01d59e474c0381d76e4679aa"
@@ -18,15 +23,17 @@ url = "http://gateway.marvel.com:80/v1/public/characters?limit=100&ts="+timestam
 response = requests.get(url)
 jsontext = json.loads(response.text)
 
+print(jsontext)
+
 
 print("\nGevonden characters in comics:")
-for item in jsontext['data']['results'][0]['comics']['items']: # deze volgorde kun je uit het zojuist geprinte resultaat halen of uit de Marvel documentatie!
+for item in jsontext['data']['results'][randomgetal]['comics']['items']: # deze volgorde kun je uit het zojuist geprinte resultaat halen of uit de Marvel documentatie!
     print(item['name'])
 
 print("\nGevonden characters in series:")
-for item in jsontext['data']['results'][0]['series']['items']: # deze volgorde kun je uit het zojuist geprinte resultaat halen of uit de Marvel documentatie!
+for item in jsontext['data']['results'][randomgetal]['series']['items']: # deze volgorde kun je uit het zojuist geprinte resultaat halen of uit de Marvel documentatie!
     print(item['name'])
 
 print("\nGevonden characters in series:")
-for item in jsontext['data']['results'][82]['comics']['items']: # deze volgorde kun je uit het zojuist geprinte resultaat halen of uit de Marvel documentatie!
+for item in jsontext['data']['results'][randomgetal]['comics']['items']: # deze volgorde kun je uit het zojuist geprinte resultaat halen of uit de Marvel documentatie!
     print(item['name'])
