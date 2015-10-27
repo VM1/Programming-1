@@ -1,3 +1,5 @@
+
+
 import time
 import hashlib
 import requests
@@ -23,8 +25,6 @@ url = "http://gateway.marvel.com:80/v1/public/characters?limit=100&ts="+timestam
 response = requests.get(url)
 jsontext = json.loads(response.text)
 
-print(jsontext)
-
 
 print("\nGevonden characters in comics:")
 for item in jsontext['data']['results'][randomgetal]['comics']['items']: # deze volgorde kun je uit het zojuist geprinte resultaat halen of uit de Marvel documentatie!
@@ -33,7 +33,9 @@ for item in jsontext['data']['results'][randomgetal]['comics']['items']: # deze 
 print("\nGevonden characters in series:")
 for item in jsontext['data']['results'][randomgetal]['series']['items']: # deze volgorde kun je uit het zojuist geprinte resultaat halen of uit de Marvel documentatie!
     print(item['name'])
+print('superheldnaam:')
+print(jsontext['data']['results'][randomgetal]['name'])
 
-print("\nGevonden characters in series:")
-for item in jsontext['data']['results'][randomgetal]['comics']['items']: # deze volgorde kun je uit het zojuist geprinte resultaat halen of uit de Marvel documentatie!
-    print(item['name'])
+hint1 = 'In deze comic is de held voorgekomen:', jsontext['data']['results'][randomgetal]['comics']['items'][0]
+
+print(hint1)
